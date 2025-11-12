@@ -2,55 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daily Quotes</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       color: white;
       margin: 0;
       padding: 2rem;
+      min-height: 100vh;
       text-align: center;
     }
 
     h1 {
       font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px #000000;
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    #quotes-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
     }
 
     .quote-card {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 15px;
       padding: 2rem;
-      margin: 1rem auto;
+      margin: 0 auto;
       max-width: 700px;
+      width: 100%;
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       border: 1px solid rgba(255, 255, 255, 0.18);
+      transition: transform 0.3s ease;
+    }
+
+    .quote-card:hover {
+      transform: translateY(-5px);
     }
 
     .quote-text {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       margin-bottom: 1rem;
       font-style: italic;
+      line-height: 1.6;
     }
 
     .quote-author {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #ffd700;
-      margin-bottom: 1rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
     }
 
     .quote-date {
       font-size: 0.9rem;
-      color: #ffffffb0;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .loading {
+      font-size: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .error {
+      color: #ff6b6b;
+      font-size: 1.1rem;
     }
 
     @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
       .quote-card {
         padding: 1.5rem;
+      }
+      .quote-text {
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -58,15 +91,30 @@
 <body>
   <h1>📚 Daily Quotes</h1>
   <div id="quotes-container">
-    <!-- Quotes will appear here -->
+    <div class="loading">Loading quotes...</div>
   </div>
 
   <script>
-    // Fetch quotes from JSON file
+    // Fetch and display quotes
     fetch('quotes.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
         const container = document.getElementById('quotes-container');
+        
+        if (data.length === 0) {
+          container.innerHTML = '<p class="error">No quotes yet. Check back tomorrow!</p>';
+          return;
+        }
+        
+        // Clear loading message
+        container.innerHTML = '';
+        
+        // Display quotes (newest first)
         data.reverse().forEach(quote => {
           const card = document.createElement('div');
           card.className = 'quote-card';
@@ -81,7 +129,7 @@
       .catch(error => {
         console.error('Error fetching quotes:', error);
         document.getElementById('quotes-container').innerHTML = 
-          '<p>Failed to load quotes. Try again later.</p>';
+          '<p class="error">Failed to load quotes. Try refreshing the page.</p>';
       });
   </script>
 </body>
