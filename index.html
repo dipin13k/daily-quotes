@@ -5,97 +5,224 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daily Quotes</title>
   <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --text-color: #ffffff;
+      --accent-color: #ffd700;
+      --shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-      color: white;
+      background: var(--primary-gradient);
+      color: var(--text-color);
       margin: 0;
       padding: 2rem;
       min-height: 100vh;
       text-align: center;
+      overflow-x: hidden;
+      animation: backgroundShift 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes backgroundShift {
+      0% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+      100% { background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%); }
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin-bottom: 2rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      animation: titleBounce 2s ease-in-out;
+    }
+
+    @keyframes titleBounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
     }
 
     #quotes-container {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 2rem;
       align-items: center;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .quote-card {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 15px;
-      padding: 2rem;
-      margin: 0 auto;
-      max-width: 700px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2.5rem;
       width: 100%;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      transition: transform 0.3s ease;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transform: translateY(50px);
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+      position: relative;
+      overflow: hidden;
     }
 
-    .quote-card:hover {
-      transform: translateY(-5px);
+    /* Staggered animation for multiple cards */
+    .quote-card:nth-child(1) { animation-delay: 0.1s; }
+    .quote-card:nth-child(2) { animation-delay: 0.2s; }
+    .quote-card:nth-child(3) { animation-delay: 0.3s; }
+    .quote-card:nth-child(n+4) { animation-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .quote-card::before {
+      content: '"';
+      font-size: 6rem;
+      color: var(--accent-color);
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      opacity: 0.3;
+      animation: quoteBounce 1.5s ease-in-out infinite;
+      font-family: serif;
+    }
+
+    @keyframes quoteBounce {
+      0%, 100% { transform: scale(1) rotate(-2deg); }
+      50% { transform: scale(1.1) rotate(2deg); }
     }
 
     .quote-text {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
       font-style: italic;
       line-height: 1.6;
+      position: relative;
+      overflow: hidden;
+      border-right: 2px solid var(--accent-color);
+      white-space: nowrap;
+      animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+    }
+
+    /* Typing animation for the first quote only (to avoid chaos with multiples) */
+    .quote-card:first-child .quote-text {
+      animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: var(--accent-color); }
     }
 
     .quote-author {
-      font-size: 1.1rem;
-      color: #ffd700;
+      font-size: 1.2rem;
+      color: var(--accent-color);
       font-weight: bold;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s ease-in 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     .quote-date {
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.7);
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      opacity: 0;
+      animation: fadeIn 1s ease-in 0.7s forwards;
     }
 
+    /* Hover effects */
+    .quote-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .quote-card:hover .quote-text {
+      color: var(--accent-color);
+    }
+
+    /* Loading spinner */
     .loading {
-      font-size: 1.2rem;
-      margin-top: 2rem;
+      display: inline-block;
+      font-size: 1.5rem;
+      margin: 2rem;
+    }
+
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid var(--accent-color);
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .error {
       color: #ff6b6b;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      animation: shake 0.5s ease-in-out;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
-      .quote-card {
-        padding: 1.5rem;
-      }
-      .quote-text {
-        font-size: 1.2rem;
-      }
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 1rem; }
+      h1 { font-size: 2.5rem; }
+      .quote-card { padding: 1.5rem; }
+      .quote-text { font-size: 1.3rem; }
+      .quote-card::before { font-size: 4rem; left: 10px; }
     }
   </style>
 </head>
 <body>
   <h1>📚 Daily Quotes</h1>
   <div id="quotes-container">
-    <div class="loading">Loading quotes...</div>
+    <div class="loading">
+      <div class="spinner"></div>
+      Loading inspirational quotes...
+    </div>
   </div>
 
   <script>
-    // Fetch and display quotes
+    // Fetch and display quotes (same as before, but with better error handling)
     fetch('quotes.json')
       .then(response => {
         if (!response.ok) {
@@ -111,15 +238,15 @@
           return;
         }
         
-        // Clear loading message
+        // Clear loading
         container.innerHTML = '';
         
         // Display quotes (newest first)
-        data.reverse().forEach(quote => {
+        data.reverse().forEach((quote, index) => {
           const card = document.createElement('div');
           card.className = 'quote-card';
           card.innerHTML = `
-            <div class="quote-text">"${quote.quote}"</div>
+            <div class="quote-text">${quote.quote}</div>
             <div class="quote-author">— ${quote.author}</div>
             <div class="quote-date">${quote.date}</div>
           `;
