@@ -2,7 +2,7 @@ name: Daily Quote
 
 on:
   schedule:
-    - cron: '0 8 * * *'
+    - cron: '0 8 * * *'  # 8 AM UTC - adjust as needed
   workflow_dispatch:
 
 permissions:
@@ -19,40 +19,52 @@ jobs:
         with:
           python-version: '3.11'
       
+      - name: Install dependencies
+        run: pip install requests
+      
       - name: Fetch and save quote
+        env:
+          TZ: America/New_York  # Set your timezone
         run: |
           python3 << 'EOF'
           import requests
           import json
           from datetime import datetime
+          import sys
           
-          # Fetch random quote
-          response = requests.get('https://api.quotable.io/random')
-          data = response.json()
-          
-          # Create quote entry
-          entry = {
-              "date": datetime.now().strftime('%Y-%m-%d'),
-              "quote": data['content'],
-              "author": data['author']
-          }
-          
-          # Read existing quotes
           try:
-              with open('quotes.json', 'r') as f:
-                  quotes = json.load(f)
-          except FileNotFoundError:
-              quotes = []
-          
-          # Add new quote
-          quotes.append(entry)
-          
-          # Write back to file
-          with open('quotes.json', 'w') as f:
-              json.dump(quotes, f, indent=2)
-          
-          print(f"✅ Quote saved: {entry['quote'][:50]}...")
-          
+              # Fetch random quote
+              response = requests.get('https://api.quotable.io/random', timeout=10)
+              response.raise_for_status()
+              data = response.json()
+              
+              # Create quote entry
+              entry = {
+                  "date": datetime.now().strftime('%Y-%m-%d'),
+                  "quote": data['content'],
+                  "author": data['author']
+              }
+              
+              # Read existing quotes
+              try:
+                  with open('quotes.json', 'r') as f:
+                      quotes = json.load(f)
+              except FileNotFoundError:
+                  quotes = []
+              
+              # Add new quote and keep only last 30
+              quotes.append(entry)
+              quotes = quotes[-30:]
+              
+              # Write back to file
+              with open('quotes.json', 'w') as f:
+                  json.dump(quotes, f, indent=2)
+              
+              print(f"✅ Quote saved: {entry['quote'][:50]}...")
+              
+          except Exception as e:
+              print(f"❌ Error: {e}", file=sys.stderr)
+              sys.exit(1)
           EOF
       
       - name: Configure Git
@@ -60,8 +72,10 @@ jobs:
           git config user.name "dipin13k"
           git config user.email "dipinkhadka130@gmail.com"
       
-      - name: Commit changes
+      - name: Commit and push
         run: |
-          git add index.html quotes.json
-          git commit -m "📅 Daily quote: $(date '+%Y-%m-%d')"
-          git push
+          git add quotes.json
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "📅 Daily quote: $(date '+%Y-%m-%d')" &&
+            git push
+          )
