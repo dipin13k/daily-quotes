@@ -31,7 +31,7 @@ jobs:
       
       - name: Fetch and save quote
         env:
-          TZ: America/New_York  # 👈 CHANGE TO YOUR TIMEZONE (e.g., Asia/Kathmandu)
+          TZ: Asia/Kathmandu  # 👈 CHANGE TO YOUR TIMEZONE (e.g., Asia/Kathmandu)
         run: |
           python3 << 'EOF'
           import requests
