@@ -14,21 +14,54 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Add quote
-        run: |
-          curl -s https://api.quotable.io/random | python3 -c "
-          import sys, json
-          from datetime import datetime
-          data = json.load(sys.stdin)
-          with open('quote.txt', 'a') as f:
-              f.write(f\"\n{datetime.now().strftime('%Y-%m-%d')}\n\")
-              f.write(f'\"{data['content']}\" - {data['author']}\n')
-          "
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
       
-      - name: Commit
+      - name: Fetch and save quote
+        run: |
+          python3 << 'EOF'
+          import requests
+          import json
+          from datetime import datetime
+          
+          # Fetch random quote
+          response = requests.get('https://api.quotable.io/random')
+          data = response.json()
+          
+          # Create quote entry
+          entry = {
+              "date": datetime.now().strftime('%Y-%m-%d'),
+              "quote": data['content'],
+              "author": data['author']
+          }
+          
+          # Read existing quotes
+          try:
+              with open('quotes.json', 'r') as f:
+                  quotes = json.load(f)
+          except FileNotFoundError:
+              quotes = []
+          
+          # Add new quote
+          quotes.append(entry)
+          
+          # Write back to file
+          with open('quotes.json', 'w') as f:
+              json.dump(quotes, f, indent=2)
+          
+          print(f"✅ Quote saved: {entry['quote'][:50]}...")
+          
+          EOF
+      
+      - name: Configure Git
         run: |
           git config user.name "dipin13k"
           git config user.email "dipinkhadka130@gmail.com"
-          git add quote.txt
-          git commit -m "Daily quote $(date +%Y-%m-%d)"
+      
+      - name: Commit changes
+        run: |
+          git add index.html quotes.json
+          git commit -m "📅 Daily quote: $(date '+%Y-%m-%d')"
           git push
