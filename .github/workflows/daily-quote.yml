@@ -2,8 +2,8 @@ name: Daily Quote
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # 8 AM UTC - adjust as needed
-  workflow_dispatch:
+    - cron: '0 8 * * *'  # Runs daily at 8 AM UTC (adjust as needed)
+  workflow_dispatch:      # Allows manual triggering
 
 permissions:
   contents: write
@@ -12,7 +12,8 @@ jobs:
   quote:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -24,7 +25,7 @@ jobs:
       
       - name: Fetch and save quote
         env:
-          TZ: America/New_York  # Set your timezone
+          TZ: Asia/Kathmandu  # 👈 CHANGE THIS TO YOUR TIMEZONE
         run: |
           python3 << 'EOF'
           import requests
@@ -33,9 +34,9 @@ jobs:
           import sys
           
           try:
-              # Fetch random quote
+              # Fetch random quote with timeout
               response = requests.get('https://api.quotable.io/random', timeout=10)
-              response.raise_for_status()
+              response.raise_for_status()  # Raise error for bad status codes
               data = response.json()
               
               # Create quote entry
@@ -52,19 +53,20 @@ jobs:
               except FileNotFoundError:
                   quotes = []
               
-              # Add new quote and keep only last 30
+              # Add new quote and keep only last 30 days
               quotes.append(entry)
-              quotes = quotes[-30:]
+              quotes = quotes[-30:]  # Limit to 30 most recent quotes
               
               # Write back to file
               with open('quotes.json', 'w') as f:
                   json.dump(quotes, f, indent=2)
               
-              print(f"✅ Quote saved: {entry['quote'][:50]}...")
+              print(f"✅ Quote saved: {entry['quote'][:60]}...")
+              print(f"📅 Total quotes: {len(quotes)}")
               
           except Exception as e:
               print(f"❌ Error: {e}", file=sys.stderr)
-              sys.exit(1)
+              sys.exit(1)  # Exit with error code
           EOF
       
       - name: Configure Git
@@ -72,10 +74,11 @@ jobs:
           git config user.name "dipin13k"
           git config user.email "dipinkhadka130@gmail.com"
       
-      - name: Commit and push
+      - name: Commit and push if changed
         run: |
           git add quotes.json
+          # Only commit if there are changes
           git diff --quiet && git diff --staged --quiet || (
-            git commit -m "📅 Daily quote: $(date '+%Y-%m-%d')" &&
+            git commit -m "📅 Daily quote: $(date -u +%Y-%m-%d)" &&
             git push
           )
