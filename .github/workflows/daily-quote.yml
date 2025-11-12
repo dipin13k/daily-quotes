@@ -1,0 +1,34 @@
+name: Daily Quote
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  quote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Add quote
+        run: |
+          curl -s https://api.quotable.io/random | python3 -c "
+          import sys, json
+          from datetime import datetime
+          data = json.load(sys.stdin)
+          with open('quote.txt', 'a') as f:
+              f.write(f\"\n{datetime.now().strftime('%Y-%m-%d')}\n\")
+              f.write(f'\"{data['content']}\" - {data['author']}\n')
+          "
+      
+      - name: Commit
+        run: |
+          git config user.name "dipin13k"
+          git config user.email "dipinkhadka130@gmail.com"
+          git add quote.txt
+          git commit -m "Daily quote $(date +%Y-%m-%d)"
+          git push
