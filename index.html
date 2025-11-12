@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Quotes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px #000000;
+    }
+
+    .quote-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 1rem auto;
+      max-width: 700px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .quote-text {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .quote-author {
+      font-size: 1rem;
+      color: #ffd700;
+      margin-bottom: 1rem;
+    }
+
+    .quote-date {
+      font-size: 0.9rem;
+      color: #ffffffb0;
+    }
+
+    @media (max-width: 600px) {
+      .quote-card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>📚 Daily Quotes</h1>
+  <div id="quotes-container">
+    <!-- Quotes will appear here -->
+  </div>
+
+  <script>
+    // Fetch quotes from JSON file
+    fetch('quotes.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('quotes-container');
+        data.reverse().forEach(quote => {
+          const card = document.createElement('div');
+          card.className = 'quote-card';
+          card.innerHTML = `
+            <div class="quote-text">"${quote.quote}"</div>
+            <div class="quote-author">— ${quote.author}</div>
+            <div class="quote-date">${quote.date}</div>
+          `;
+          container.appendChild(card);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching quotes:', error);
+        document.getElementById('quotes-container').innerHTML = 
+          '<p>Failed to load quotes. Try again later.</p>';
+      });
+  </script>
+</body>
+</html>
