@@ -2,8 +2,8 @@ name: Daily Quote
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # 8 AM UTC
-  workflow_dispatch:
+    - cron: '0 8 * * *'  # 8 AM UTC (adjust as needed)
+  workflow_dispatch:  # Manual trigger
 
 permissions:
   contents: write
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Get all history for all branches and tags
+          fetch-depth: 0
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -31,7 +31,7 @@ jobs:
       
       - name: Fetch and save quote
         env:
-          TZ: America/New_York  # Change to your timezone
+          TZ: America/New_York  # 👈 CHANGE TO YOUR TIMEZONE (e.g., Asia/Kathmandu)
         run: |
           python3 << 'EOF'
           import requests
@@ -41,43 +41,49 @@ jobs:
           import time
 
           def get_quote():
-              # Try primary API
-              try:
-                  response = requests.get('https://api.quotable.io/random', timeout=10)
-                  response.raise_for_status()
-                  data = response.json()
-                  return {
-                      "quote": data['content'],
-                      "author": data['author']
+              # Primary API: ZenQuotes (reliable, no SSL issues)
+              apis = [
+                  {
+                      'url': 'https://zenquotes.io/api/random',
+                      'parse': lambda data: {'quote': data[0]['q'], 'author': data[0]['a']}
+                  },
+                  # Fallback API 1: Type.fit (another reliable option)
+                  {
+                      'url': 'https://type.fit/api/quotes',
+                      'parse': lambda data: {'quote': data[0]['text'], 'author': data[0]['author'] or 'Unknown'}
+                  },
+                  # Fallback API 2: Simple quotes (backup)
+                  {
+                      'url': 'https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json',
+                      'parse': lambda data: {'quote': data['quoteText'], 'author': data['quoteAuthor'] or 'Unknown'}
                   }
-              except Exception as e:
-                  print(f"Primary API failed: {e}")
+              ]
               
-              # Fallback API
-              try:
-                  response = requests.get('https://zenquotes.io/api/random', timeout=10)
-                  response.raise_for_status()
-                  data = response.json()[0]
-                  return {
-                      "quote": data['q'],
-                      "author": data['a']
-                  }
-              except Exception as e:
-                  print(f"Fallback API failed: {e}")
-                  return None
+              for i, api in enumerate(apis):
+                  try:
+                      print(f"Trying API {i+1}: {api['url']}")
+                      response = requests.get(api['url'], timeout=10)
+                      response.raise_for_status()
+                      data = response.json()
+                      quote_data = api['parse'](data)
+                      
+                      # Clean up quote (remove citations if present)
+                      quote_data['quote'] = quote_data['quote'].replace('—', '').strip()
+                      
+                      print(f"✅ API {i+1} succeeded!")
+                      return quote_data
+                      
+                  except Exception as e:
+                      print(f"❌ API {i+1} failed: {e}")
+                      if i < len(apis) - 1:
+                          time.sleep(1)  # Wait before retrying next API
+                      continue
+              
+              raise Exception("All APIs failed - check your internet or API status")
 
           try:
-              # Get quote with retry logic
-              quote = None
-              for attempt in range(3):
-                  quote = get_quote()
-                  if quote:
-                      break
-                  print(f"Attempt {attempt + 1} failed, retrying...")
-                  time.sleep(2)
-              
-              if not quote:
-                  raise Exception("All quote APIs failed")
+              # Get quote
+              quote = get_quote()
               
               # Create entry
               entry = {
@@ -93,7 +99,7 @@ jobs:
               except FileNotFoundError:
                   quotes = []
               except json.JSONDecodeError:
-                  quotes = []
+                  quotes = []  # Start fresh if corrupted
                   print("⚠️ quotes.json was corrupted, starting fresh")
               
               # Add new quote and keep last 30
@@ -104,7 +110,9 @@ jobs:
               with open('quotes.json', 'w', encoding='utf-8') as f:
                   json.dump(quotes, f, indent=2, ensure_ascii=False)
               
-              print(f"✅ Quote saved: {entry['quote'][:60]}...")
+              print(f"✅ Quote saved for {entry['date']}:")
+              print(f"   '{entry['quote'][:60]}...'")
+              print(f"   — {entry['author']}")
               print(f"📅 Total quotes: {len(quotes)}")
               
           except Exception as e:
@@ -117,11 +125,12 @@ jobs:
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
           git add quotes.json
-          git status
-          if ! git diff-index --quiet HEAD --; then
+          git status --porcelain
+          if [ -n "$(git status --porcelain)" ]; then
             git commit -m "📅 Daily quote: $(date -u +'%Y-%m-%d')"
-            git pull --rebase  # Avoid conflicts
-            git push
+            git pull --rebase origin main  # Avoid conflicts
+            git push origin main
+            echo "✅ Committed and pushed successfully!"
           else
-            echo "No changes to commit"
+            echo "ℹ️ No changes to commit (quote already exists for today)"
           fi
