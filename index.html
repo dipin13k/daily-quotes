@@ -3,48 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✨ Timeless Wisdom</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <title>✨ Daily Quotes Collection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #654ea3 0%, #eaafc8 100%);
-      --card-bg: rgba(255, 255, 255, 0.15);
-      --header-color: #f8f9fa;
-      --accent: #ff6b6b;
-      --accent2: #4ecdc4;
-      --glass-border: 1px solid rgba(255, 255, 255, 0.18);
-      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-      --transition-fast: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      --transition-smooth: 0.5s ease-in-out;
-      --border-radius: 20px;
+      /* Light mode colors */
+      --bg-primary: #f0f4ff;
+      --bg-gradient-1: #667eea;
+      --bg-gradient-2: #764ba2;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --card-border: rgba(255, 255, 255, 0.3);
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a5568;
+      --accent: #667eea;
+      --accent-glow: rgba(102, 126, 234, 0.3);
+      --shadow: rgba(0, 0, 0, 0.1);
+      --particle-color: rgba(255, 255, 255, 0.6);
     }
 
     [data-theme="dark"] {
-      --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      --card-bg: rgba(20, 20, 30, 0.35);
-      --header-color: #f8f9fa;
-      --accent: #ff6b6b;
-      --accent2: #4ecdc4;
-      --glass-border: 1px solid rgba(70, 70, 90, 0.2);
-      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+      /* Dark mode colors */
+      --bg-primary: #0a0e27;
+      --bg-gradient-1: #1a1a2e;
+      --bg-gradient-2: #16213e;
+      --card-bg: rgba(30, 30, 50, 0.6);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #ffffff;
+      --text-secondary: #a0aec0;
+      --accent: #00d4ff;
+      --accent-glow: rgba(0, 212, 255, 0.3);
+      --shadow: rgba(0, 0, 0, 0.3);
+      --particle-color: rgba(0, 212, 255, 0.3);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: var(--bg-gradient);
-      color: var(--header-color);
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+      color: var(--text-primary);
       min-height: 100vh;
       padding: 2rem;
       position: relative;
       overflow-x: hidden;
-      transition: background 1s var(--transition-smooth);
+      transition: all 0.5s ease;
+    }
+
+    /* Animated mesh background */
+    .mesh-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.3;
+      background: 
+        radial-gradient(circle at 20% 50%, var(--accent-glow) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--accent-glow) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, var(--accent-glow) 0%, transparent 50%);
+      animation: meshMove 20s ease-in-out infinite;
+    }
+    @keyframes meshMove {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
     }
 
     /* Floating particles */
@@ -55,280 +82,460 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: -1;
+      z-index: 1;
     }
     .particle {
       position: absolute;
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--particle-color);
       border-radius: 50%;
-      z-index: -1;
-      animation: float 15s linear infinite;
+      animation: float 15s infinite ease-in-out;
     }
     @keyframes float {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-      10% { opacity: 0.7; }
-      90% { opacity: 0.7; }
-      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+      0%, 100% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-100vh) translateX(100px) rotate(720deg);
+        opacity: 0;
+      }
     }
 
-    /* Header with typing animation */
+    /* Header with glowing effect */
     header {
       text-align: center;
-      margin: 2rem 0 3rem;
+      margin-bottom: 3rem;
       position: relative;
-      z-index: 1;
+      z-index: 2;
+      animation: slideDown 0.8s ease-out;
     }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      margin-bottom: 1rem;
-      background: linear-gradient(45deg, var(--accent), var(--accent2));
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--accent), var(--text-primary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
       position: relative;
       display: inline-block;
+      animation: textGlow 3s ease-in-out infinite;
     }
-    h1::before, h1::after {
-      content: "✦";
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--accent);
-      opacity: 0.7;
+    @keyframes textGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 10px var(--accent-glow));
+      }
+      50% {
+        filter: drop-shadow(0 0 30px var(--accent-glow)) drop-shadow(0 0 40px var(--accent-glow));
+      }
     }
-    h1::before { left: -2rem; }
-    h1::after { right: -2rem; }
 
     .subtitle {
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 3vw, 1.3rem);
       font-weight: 300;
-      font-size: clamp(1rem, 4vw, 1.4rem);
-      display: block;
-      margin-top: 0.5rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      letter-spacing: 1px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      animation: fadeIn 1.2s ease-out 0.3s backwards;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
-    /* Theme toggle */
+    /* Theme toggle button */
     .theme-toggle {
       position: fixed;
       top: 2rem;
       right: 2rem;
-      width: 45px;
-      height: 45px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
+      width: 60px;
+      height: 60px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--card-border);
       border-radius: 50%;
-      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--transition-fast);
-      z-index: 999;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+      font-size: 1.8rem;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      z-index: 1000;
+      box-shadow: 0 5px 25px var(--shadow);
     }
     .theme-toggle:hover {
-      transform: scale(1.1) rotate(30deg);
-      background: rgba(255,255,255,0.2);
-      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+      transform: scale(1.2) rotate(180deg);
+      box-shadow: 0 8px 35px var(--accent-glow);
+      border-color: var(--accent);
     }
-    .theme-toggle span {
-      font-size: 1.3rem;
+    .theme-toggle:active {
+      transform: scale(0.9) rotate(180deg);
     }
 
-    /* Quotes grid */
-    #quotes-grid {
+    /* Stats counter */
+    .stats {
+      text-align: center;
+      margin-bottom: 2rem;
+      z-index: 2;
+      position: relative;
+    }
+    .stat-box {
+      display: inline-block;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 5px 25px var(--shadow);
+      animation: popIn 0.6s ease-out 0.5s backwards;
+    }
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      70% {
+        transform: scale(1.1);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Quotes grid - 3 per row */
+    #quotes-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
       max-width: 1400px;
       margin: 0 auto;
-      opacity: 0;
-      animation: fadeIn 1s var(--transition-smooth) forwards;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      position: relative;
+      z-index: 2;
     }
 
-    /* Quote cards with flip effect */
+    /* Quote cards with advanced animations */
     .quote-card {
       background: var(--card-bg);
-      border-radius: var(--border-radius);
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
       padding: 2rem;
-      position: relative;
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: var(--glass-border);
-      transition: var(--transition-fast);
-      transform-style: preserve-3d;
-      transform: perspective(1000px) rotateY(0deg);
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      border: 2px solid var(--card-border);
+      box-shadow: 0 8px 32px var(--shadow);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       opacity: 0;
-      animation: cardAppear 0.8s var(--transition-smooth) forwards;
+      transform: translateY(80px) rotateX(10deg);
+      animation: cardReveal 0.8s forwards;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
     }
+    @keyframes cardReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+      }
+    }
+
+    /* Stagger animation for each card */
     .quote-card:nth-child(1) { animation-delay: 0.1s; }
     .quote-card:nth-child(2) { animation-delay: 0.2s; }
     .quote-card:nth-child(3) { animation-delay: 0.3s; }
     .quote-card:nth-child(4) { animation-delay: 0.4s; }
     .quote-card:nth-child(5) { animation-delay: 0.5s; }
     .quote-card:nth-child(6) { animation-delay: 0.6s; }
-    @keyframes cardAppear {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
+    .quote-card:nth-child(n+7) { animation-delay: 0.7s; }
+
+    /* Shimmer effect on hover */
+    .quote-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        var(--accent-glow),
+        transparent
+      );
+      transform: rotate(45deg);
+      transition: all 0.6s;
+      opacity: 0;
     }
+    .quote-card:hover::before {
+      left: 100%;
+      opacity: 1;
+    }
+
     .quote-card:hover {
-      transform: perspective(1000px) rotateY(10deg) scale(1.03);
-      box-shadow: 0 20px 50px 0 rgba(0,0,0,0.2);
+      transform: translateY(-15px) scale(1.03);
+      box-shadow: 0 20px 60px var(--accent-glow);
       border-color: var(--accent);
     }
 
-    /* Quote text styling */
+    /* Quote number badge */
+    .quote-number {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 3px 15px var(--accent-glow);
+      animation: rotateBadge 0.6s ease-out;
+    }
+    @keyframes rotateBadge {
+      from {
+        transform: rotate(-180deg) scale(0);
+      }
+      to {
+        transform: rotate(0deg) scale(1);
+      }
+    }
+
+    /* Quote text */
     .quote-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      line-height: 1.6;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--text-primary);
       margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      border-left: 4px solid var(--accent);
+      min-height: 100px;
+      font-weight: 400;
       position: relative;
-      transition: var(--transition-fast);
+      transition: all 0.3s ease;
+    }
+    .quote-card:hover .quote-text {
+      padding-left: 2rem;
+      border-left-width: 6px;
     }
     .quote-text::before {
-      content: "❝";
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      line-height: 1;
-      color: var(--accent);
-      opacity: 0.3;
+      content: '"';
+      font-size: 4rem;
       position: absolute;
+      left: -0.5rem;
       top: -1.5rem;
-      left: -1rem;
+      color: var(--accent);
+      opacity: 0.2;
+      font-family: Georgia, serif;
     }
 
-    /* Author styling */
+    /* Author with icon */
     .quote-author {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--accent2);
-      margin-top: auto;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
     .quote-author::before {
-      content: "— ";
-      color: var(--header-color);
-      opacity: 0.7;
+      content: '✍️';
+      font-size: 1.2rem;
     }
+
+    /* Date badge */
     .quote-date {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.7);
-      font-style: italic;
-      margin-top: 0.5rem;
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      background: rgba(0, 0, 0, 0.1);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
-
-    /* Loading & error states */
-    .loading {
-      text-align: center;
-      font-size: 1.5rem;
-      padding: 3rem;
-      color: var(--accent);
-      animation: loadingPulse 2s ease-in-out infinite alternate;
-      grid-column: 1 / -1;
+    .quote-date::before {
+      content: '📅';
     }
-    @keyframes loadingPulse {
-      from { opacity: 0.5; transform: scale(0.98); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .error {
-      background: rgba(255, 50, 50, 0.2);
-      color: #ff9999;
-      border: 1px solid rgba(255,100,100,0.2);
-      text-align: center;
-      padding: 2rem 1rem;
-      border-radius: var(--border-radius);
-      margin: 2rem 0;
-      font-size: 1.1rem;
-      grid-column: 1 / -1;
-    }
-    .error button {
-      padding: 8px 20px;
-      margin-top: 1rem;
-      background: linear-gradient(45deg, var(--accent), var(--accent2));
+    .quote-card:hover .quote-date {
+      background: var(--accent);
       color: white;
-      border: none;
-      border-radius: 25px;
+      transform: translateX(5px);
+    }
+
+    /* Loading spinner */
+    .loading {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem;
+      font-size: 1.5rem;
+      color: var(--text-primary);
+    }
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--card-border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Error message */
+    .error {
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px solid rgba(255, 100, 100, 0.3);
+      box-shadow: 0 10px 40px rgba(255, 0, 0, 0.2);
+    }
+    .error-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: shake 0.5s ease-in-out;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      transition: all 0.3s;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 5px 25px var(--accent-glow);
     }
-    .error button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 5px 15px rgba(255,100,100,0.3);
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
     }
-
-    /* Floating animation for cards */
-    @keyframes floatCard {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    .quote-card:hover {
-      animation: floatCard 3s ease-in-out infinite;
+    .scroll-top:hover {
+      transform: translateY(-5px) scale(1.1);
     }
 
-    /* Mobile responsiveness */
+    /* Responsive - 2 columns on tablet */
+    @media (max-width: 1100px) {
+      #quotes-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Responsive - 1 column on mobile */
     @media (max-width: 768px) {
-      #quotes-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      body {
+        padding: 1rem;
+      }
+      #quotes-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
       .quote-card {
         padding: 1.5rem;
-        min-height: 250px;
-      }
-      .quote-text {
-        font-size: 1.2rem;
       }
       .theme-toggle {
         top: 1rem;
         right: 1rem;
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
       }
-    }
-    @media (max-width: 600px) {
-      body { padding: 1rem; }
-      .quote-card {
-        min-height: 220px;
-      }
-      .quote-text::before {
+      h1 {
         font-size: 2.5rem;
-        top: -1.2rem;
       }
     }
   </style>
 </head>
-<body>
+<body data-theme="light">
+  <!-- Animated mesh background -->
+  <div class="mesh-bg"></div>
+
+  <!-- Floating particles -->
   <div class="particles" id="particles"></div>
 
+  <!-- Header -->
   <header>
-    <h1>TIMELESS WISDOM</h1>
-    <span class="subtitle">From the Past to the Present</span>
+    <h1>✨ Daily Quotes</h1>
+    <div class="subtitle">Oldest to Newest</div>
   </header>
 
-  <div id="quotes-grid">
-    <div class="loading">
-      <span>🔮 Loading wisdom through the ages...</span>
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-box">
+      <span class="stat-number" id="quote-count">0</span>
+      <span class="stat-label">Total Quotes</span>
     </div>
   </div>
 
-  <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">
+  <!-- Theme toggle -->
+  <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
     <span id="theme-icon">🌙</span>
+  </div>
+
+  <!-- Quotes grid -->
+  <div id="quotes-container">
+    <div class="loading">
+      <div class="spinner"></div>
+      Loading your wisdom...
+    </div>
+  </div>
+
+  <!-- Scroll to top -->
+  <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+    ⬆️
   </div>
 
   <script>
@@ -338,117 +545,131 @@
       for (let i = 0; i < 25; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
-        const size = Math.random() * 50 + 5;
+        const size = Math.random() * 50 + 20;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
-        particle.style.left = `${Math.random() * 100}vw`;
-        particle.style.opacity = Math.random() * 0.4 + 0.1;
-        particle.style.background = `hsl(${Math.random() * 360}, 70%, 60%, ${Math.random() * 0.1 + 0.02})`;
-        particle.style.animationDuration = `${Math.random() * 20 + 15}s`;
-        particle.style.animationDelay = `${Math.random() * 10}s`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.bottom = `-${size}px`;
+        particle.style.animationDuration = `${Math.random() * 10 + 15}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
         container.appendChild(particle);
       }
     }
 
-    // Dark mode toggle
+    // Theme toggle with smooth transition
     function toggleTheme() {
-      const icon = document.getElementById('theme-icon');
       const body = document.body;
+      const icon = document.getElementById('theme-icon');
+      const currentTheme = body.getAttribute('data-theme');
       
-      if (body.getAttribute('data-theme') === 'dark') {
+      if (currentTheme === 'dark') {
         body.setAttribute('data-theme', 'light');
-        icon.innerHTML = '🌙';
+        icon.textContent = '🌙';
         localStorage.setItem('theme', 'light');
       } else {
         body.setAttribute('data-theme', 'dark');
-        icon.innerHTML = '☀️';
+        icon.textContent = '☀️';
         localStorage.setItem('theme', 'dark');
       }
     }
 
-    // Set theme from localStorage
-    function setInitialTheme() {
+    // Load saved theme
+    function loadTheme() {
       const savedTheme = localStorage.getItem('theme') || 'light';
       const icon = document.getElementById('theme-icon');
       document.body.setAttribute('data-theme', savedTheme);
-      icon.innerHTML = savedTheme === 'dark' ? '☀️' : '🌙';
+      icon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
     }
 
-    // Main quote loading
+    // Scroll to top functionality
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.getElementById('scrollTop');
+      if (window.pageYOffset > 300) {
+        scrollTop.classList.add('visible');
+      } else {
+        scrollTop.classList.remove('visible');
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Load quotes (OLDEST TO NEWEST)
     async function loadQuotes() {
-      const container = document.getElementById('quotes-grid');
+      const container = document.getElementById('quotes-container');
+      const countElement = document.getElementById('quote-count');
       
       try {
         const response = await fetch('quotes.json');
         const data = await response.json();
         
-        if (!data || data.length === 0) {
-          container.innerHTML = '<div class="error">No quotes found. Check back later! ✨</div>';
+        if (data.length === 0) {
+          container.innerHTML = `
+            <div class="error">
+              <div class="error-icon">📭</div>
+              <h2>No quotes yet!</h2>
+              <p>Your first quote will appear tomorrow ✨</p>
+            </div>
+          `;
           return;
         }
         
-        // Clear loading
+        // Animate count
+        animateCount(0, data.length, countElement);
+        
         container.innerHTML = '';
         
-        // Sort from oldest to newest
-        const sortedQuotes = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
-        
-        // Create cards
-        sortedQuotes.forEach((quote, index) => {
+        // Display oldest to newest
+        data.forEach((quote, index) => {
           const card = document.createElement('div');
           card.className = 'quote-card';
           card.style.animationDelay = `${index * 0.1}s`;
-          
-          // Format date
-          const formattedDate = new Date(quote.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-          });
-          
           card.innerHTML = `
+            <div class="quote-number">${index + 1}</div>
             <div class="quote-text">${quote.quote}</div>
             <div class="quote-author">${quote.author}</div>
-            <div class="quote-date">${formattedDate}</div>
+            <div class="quote-date">${quote.date}</div>
           `;
-          
           container.appendChild(card);
-          
-          // Add hover effect
-          card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateY = (x - centerX) / 15;
-            const rotateX = (centerY - y) / 15;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-          });
-          
-          card.addEventListener('mouseout', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-          });
         });
         
       } catch (error) {
         console.error('Error:', error);
         container.innerHTML = `
           <div class="error">
-            Failed to load quotes. Try again later.<br>
-            <button onclick="location.reload()">🔁 Refresh Page</button>
+            <div class="error-icon">⚠️</div>
+            <h2>Failed to load quotes</h2>
+            <p>Please refresh the page to try again</p>
           </div>
         `;
       }
     }
 
+    // Animate counter
+    function animateCount(start, end, element) {
+      const duration = 1500;
+      const increment = end / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= end) {
+          element.textContent = end;
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }, 16);
+    }
+
     // Initialize on page load
     window.addEventListener('DOMContentLoaded', () => {
       createParticles();
-      setInitialTheme();
+      loadTheme();
       setTimeout(loadQuotes, 500);
     });
   </script>
