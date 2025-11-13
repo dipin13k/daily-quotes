@@ -3,26 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✨ Daily Quotes</title>
+  <title>✨ Timeless Wisdom</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-      --card-bg: rgba(255, 255, 255, 0.18);
-      --header-color: #ecf0f1;
-      --accent: #00ffc8;
+      --bg-gradient: linear-gradient(135deg, #654ea3 0%, #eaafc8 100%);
+      --card-bg: rgba(255, 255, 255, 0.15);
+      --header-color: #f8f9fa;
+      --accent: #ff6b6b;
+      --accent2: #4ecdc4;
       --glass-border: 1px solid rgba(255, 255, 255, 0.18);
-      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
       --transition-fast: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       --transition-smooth: 0.5s ease-in-out;
-      --border-radius: 25px;
+      --border-radius: 20px;
     }
 
     [data-theme="dark"] {
-      --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       --card-bg: rgba(20, 20, 30, 0.35);
-      --header-color: #bb86fc;
-      --accent: #03dac6;
+      --header-color: #f8f9fa;
+      --accent: #ff6b6b;
+      --accent2: #4ecdc4;
       --glass-border: 1px solid rgba(70, 70, 90, 0.2);
       --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
     }
@@ -72,48 +74,37 @@
     /* Header with typing animation */
     header {
       text-align: center;
-      margin: 2rem 0;
+      margin: 2rem 0 3rem;
       position: relative;
       z-index: 1;
     }
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.5rem, 8vw, 4rem);
-      margin-bottom: 1.5rem;
-      color: var(--accent);
-      text-shadow: 0 0 10px rgba(0,255,200,0.3), 0 0 30px rgba(0,255,200,0.1);
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       position: relative;
       display: inline-block;
-      animation: glow 3s ease-in-out infinite alternate;
     }
-    @keyframes glow {
-      from { text-shadow: 0 0 5px rgba(0,255,200,0.3), 0 0 15px rgba(0,255,200,0.1); }
-      to { text-shadow: 0 0 15px rgba(0,255,200,0.5), 0 0 30px rgba(0,255,200,0.3), 0 0 45px rgba(0,255,200,0.1); }
-    }
-    h1::before {
+    h1::before, h1::after {
       content: "✦";
       position: absolute;
-      left: -4rem;
-      animation: sparkle 4s ease-in-out infinite alternate-reverse;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      opacity: 0.7;
     }
-    h1::after {
-      content: "✦";
-      position: absolute;
-      right: -4rem;
-      animation: sparkle 4s 2s ease-in-out infinite alternate;
-    }
-    @keyframes sparkle {
-      0% { transform: scale(0.5) rotate(0deg); opacity: 0.4; }
-      50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
-      100% { transform: scale(0.5) rotate(360deg); opacity: 0.4; }
-    }
+    h1::before { left: -2rem; }
+    h1::after { right: -2rem; }
 
     .subtitle {
       color: rgba(255, 255, 255, 0.9);
       font-weight: 300;
       font-size: clamp(1rem, 4vw, 1.4rem);
       display: block;
-      margin: -0.5rem 0 2rem;
+      margin-top: 0.5rem;
       text-shadow: 0 2px 4px rgba(0,0,0,0.2);
       letter-spacing: 1px;
     }
@@ -125,8 +116,8 @@
       right: 2rem;
       width: 45px;
       height: 45px;
-      background: rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
       border-radius: 50%;
       cursor: pointer;
       display: flex;
@@ -138,16 +129,20 @@
       -webkit-backdrop-filter: blur(10px);
     }
     .theme-toggle:hover {
-      transform: scale(1.2) rotate(30deg);
-      background: rgba(255,255,255,0.1);
+      transform: scale(1.1) rotate(30deg);
+      background: rgba(255,255,255,0.2);
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
     }
     .theme-toggle span {
       font-size: 1.3rem;
     }
 
-    /* Quote container with fade-in animation */
-    #quotes-container {
-      max-width: 900px;
+    /* Quotes grid */
+    #quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      max-width: 1400px;
       margin: 0 auto;
       opacity: 0;
       animation: fadeIn 1s var(--transition-smooth) forwards;
@@ -157,12 +152,11 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Quote cards with 3D effect */
+    /* Quote cards with flip effect */
     .quote-card {
       background: var(--card-bg);
       border-radius: var(--border-radius);
-      padding: 2.5rem 3rem;
-      margin: 2rem 0;
+      padding: 2rem;
       position: relative;
       box-shadow: var(--glass-shadow);
       backdrop-filter: blur(10px);
@@ -170,118 +164,72 @@
       border: var(--glass-border);
       transition: var(--transition-fast);
       transform-style: preserve-3d;
-      transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+      transform: perspective(1000px) rotateY(0deg);
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       opacity: 0;
       animation: cardAppear 0.8s var(--transition-smooth) forwards;
     }
-    .quote-card:nth-child(odd) { animation-delay: 0.3s; }
-    .quote-card:nth-child(even) { animation-delay: 0.6s; }
+    .quote-card:nth-child(1) { animation-delay: 0.1s; }
+    .quote-card:nth-child(2) { animation-delay: 0.2s; }
+    .quote-card:nth-child(3) { animation-delay: 0.3s; }
+    .quote-card:nth-child(4) { animation-delay: 0.4s; }
+    .quote-card:nth-child(5) { animation-delay: 0.5s; }
+    .quote-card:nth-child(6) { animation-delay: 0.6s; }
     @keyframes cardAppear {
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .quote-card:hover {
-      transform: perspective(1000px) 
-               rotateX(6deg) 
-               rotateY(6deg) 
-               translateY(-10px) 
-               scale(1.025);
-      box-shadow: 0 20px 50px 0 rgba(0,0,0,0.3),
-                  0 10px 20px 0 rgba(255,255,255,0.05);
+      transform: perspective(1000px) rotateY(10deg) scale(1.03);
+      box-shadow: 0 20px 50px 0 rgba(0,0,0,0.2);
       border-color: var(--accent);
-    }
-    .quote-card:hover::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: var(--border-radius);
-      box-shadow: 0 0 20px 5px var(--accent);
-      opacity: 0.4;
-      z-index: -1;
-      animation: pulse 2s ease-in-out infinite alternate;
-    }
-    @keyframes pulse {
-      from { opacity: 0.2; }
-      to { opacity: 0.6; }
     }
 
     /* Quote text styling */
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      position: relative;
+      transition: var(--transition-fast);
+    }
     .quote-text::before {
       content: "❝";
       font-family: 'Playfair Display', serif;
-      font-size: 5rem;
+      font-size: 3rem;
       line-height: 1;
       color: var(--accent);
       opacity: 0.3;
       position: absolute;
-      top: -0.8rem;
-      left: 1rem;
+      top: -1.5rem;
+      left: -1rem;
     }
-    .quote-text::after {
-      content: "❞";
-      font-family: 'Playfair Display', serif;
-      font-size: 5rem;
-      line-height: 0;
-      color: var(--accent);
-      opacity: 0.3;
-      position: absolute;
-      bottom: -3.2rem;
-      right: 1.5rem;
-    }
-    .quote-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.7rem;
-      line-height: 1.8;
-      font-weight: 500;
-      margin-bottom: 1.8rem;
-      position: relative;
-      transform: scale(0.95);
-      transition: var(--transition-fast);
-    }
-    .quote-card:hover .quote-text {
-      color: white;
-      transform: scale(1.02);
-    }
-    .quote-text span {
-      display: inline-block;
-      background: linear-gradient(45deg, var(--accent), var(--header-color));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 700;
-      font-size: 110%;
-    }
+
     /* Author styling */
     .quote-author {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 1px;
-      display: inline-block;
-      position: relative;
-      padding: 0 5px;
-      background: rgba(0,0,0,0.1);
-      border-radius: 5px;
-      margin-bottom: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent2);
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
     .quote-author::before {
       content: "— ";
-      font-weight: 400;
       color: var(--header-color);
-      opacity: 0.8;
+      opacity: 0.7;
     }
     .quote-date {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
       font-style: italic;
-      font-weight: 300;
-      background: rgba(0,0,0,0.1);
-      padding: 2px 10px;
-      border-radius: 12px;
+      margin-top: 0.5rem;
+      display: block;
     }
 
     /* Loading & error states */
@@ -291,6 +239,7 @@
       padding: 3rem;
       color: var(--accent);
       animation: loadingPulse 2s ease-in-out infinite alternate;
+      grid-column: 1 / -1;
     }
     @keyframes loadingPulse {
       from { opacity: 0.5; transform: scale(0.98); }
@@ -305,11 +254,12 @@
       border-radius: var(--border-radius);
       margin: 2rem 0;
       font-size: 1.1rem;
+      grid-column: 1 / -1;
     }
     .error button {
       padding: 8px 20px;
       margin-top: 1rem;
-      background: linear-gradient(45deg, #ff3a6b, #ff7a45);
+      background: linear-gradient(45deg, var(--accent), var(--accent2));
       color: white;
       border: none;
       border-radius: 25px;
@@ -320,43 +270,29 @@
     }
     .error button:hover {
       transform: scale(1.1);
-      box-shadow: 0 5px 20px rgba(255,100,100,0.4);
+      box-shadow: 0 5px 15px rgba(255,100,100,0.3);
     }
 
-    /* Floating animation for oldest quotes */
-    .floating-dots {
-      position: fixed;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 4px;
-      z-index: 0;
+    /* Floating animation for cards */
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
-    .dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      opacity: 0;
-      animation: fadeDot 4s linear infinite;
-    }
-    .dot:nth-child(2) { animation-delay: 0.2s; }
-    .dot:nth-child(3) { animation-delay: 0.4s; }
-    .dot:nth-child(4) { animation-delay: 0.6s; }
-    .dot:nth-child(5) { animation-delay: 0.8s; }
-    @keyframes fadeDot {
-      0%, 100% { opacity: 0; transform: translateY(0); }
-      50% { opacity: 0.7; transform: translateY(-15px) scale(1.3); }
+    .quote-card:hover {
+      animation: floatCard 3s ease-in-out infinite;
     }
 
     /* Mobile responsiveness */
     @media (max-width: 768px) {
+      #quotes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
       .quote-card {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem;
+        min-height: 250px;
       }
       .quote-text {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
       }
       .theme-toggle {
         top: 1rem;
@@ -368,16 +304,11 @@
     @media (max-width: 600px) {
       body { padding: 1rem; }
       .quote-card {
-        transform: none !important;
-        margin: 1.2rem 0;
+        min-height: 220px;
       }
       .quote-text::before {
-        font-size: 3rem;
-        top: -0.2rem;
-      }
-      .quote-text::after {
-        font-size: 3rem;
-        bottom: -2.2rem;
+        font-size: 2.5rem;
+        top: -1.2rem;
       }
     }
   </style>
@@ -386,13 +317,13 @@
   <div class="particles" id="particles"></div>
 
   <header>
-    <h1>✨ DAILY QUOTES</h1>
-    <span class="subtitle">Wisdom for Today, Inspiration for Tomorrow</span>
+    <h1>TIMELESS WISDOM</h1>
+    <span class="subtitle">From the Past to the Present</span>
   </header>
 
-  <div id="quotes-container">
+  <div id="quotes-grid">
     <div class="loading">
-      <span>🔮 Loading today's wisdom...</span>
+      <span>🔮 Loading wisdom through the ages...</span>
     </div>
   </div>
 
@@ -400,26 +331,19 @@
     <span id="theme-icon">🌙</span>
   </div>
 
-  <div class="floating-dots">
-    <div class="dot"></div><div class="dot"></div>
-    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-  </div>
-
   <script>
     // Create animated particles
     function createParticles() {
       const container = document.getElementById('particles');
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 25; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
-        const size = Math.random() * 60 + 10;
+        const size = Math.random() * 50 + 5;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         particle.style.left = `${Math.random() * 100}vw`;
-        particle.style.opacity = Math.random() * 0.5 + 0.3;
-        particle.style.background = Math.random() > 0.8 
-          ? 'linear-gradient(45deg, #00ffc8, #a82cff)' 
-          : `hsl(${Math.random() * 360}, 70%, 60%, ${Math.random() * 0.1 + 0.02})`;
+        particle.style.opacity = Math.random() * 0.4 + 0.1;
+        particle.style.background = `hsl(${Math.random() * 360}, 70%, 60%, ${Math.random() * 0.1 + 0.02})`;
         particle.style.animationDuration = `${Math.random() * 20 + 15}s`;
         particle.style.animationDelay = `${Math.random() * 10}s`;
         container.appendChild(particle);
@@ -430,16 +354,15 @@
     function toggleTheme() {
       const icon = document.getElementById('theme-icon');
       const body = document.body;
-      body.classList.toggle('dark-mode');
       
-      if (body.classList.contains('dark-mode')) {
-        body.setAttribute('data-theme', 'dark');
-        icon.innerHTML = '☀️';
-        localStorage.setItem('theme', 'dark');
-      } else {
+      if (body.getAttribute('data-theme') === 'dark') {
         body.setAttribute('data-theme', 'light');
         icon.innerHTML = '🌙';
         localStorage.setItem('theme', 'light');
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        icon.innerHTML = '☀️';
+        localStorage.setItem('theme', 'dark');
       }
     }
 
@@ -451,63 +374,48 @@
       icon.innerHTML = savedTheme === 'dark' ? '☀️' : '🌙';
     }
 
-    // Highlight a random word in each quote
-    function highlightRandomWord() {
-      document.querySelectorAll('.quote-text').forEach(text => {
-        const words = text.innerText.split(' ');
-        if (words.length < 3) return;
-        
-        const span = document.createElement('span');
-        const randomIndex = Math.floor(Math.random() * (words.length - 2)) + 1;
-        
-        const before = words.slice(0, randomIndex).join(' ');
-        const highlight = `<span>${words[randomIndex]}</span>`;
-        const after = words.slice(randomIndex + 1).join(' ');
-        
-        text.innerHTML = before + highlight + after;
-      });
-    }
-
-    // Smooth reveal animation for cards
-    function animateCards(card, index) {
-      card.style.opacity = '0';
-      setTimeout(() => {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-      }, 300 + (index * 100));
-    }
-
     // Main quote loading
     async function loadQuotes() {
-      const container = document.getElementById('quotes-container');
+      const container = document.getElementById('quotes-grid');
       
       try {
         const response = await fetch('quotes.json');
         const data = await response.json();
         
-        if (data.length === 0) {
-          container.innerHTML = '<div class="error">No quotes yet. Check back tomorrow! ✨</div>';
+        if (!data || data.length === 0) {
+          container.innerHTML = '<div class="error">No quotes found. Check back later! ✨</div>';
           return;
         }
         
         // Clear loading
         container.innerHTML = '';
         
+        // Sort from oldest to newest
+        const sortedQuotes = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+        
         // Create cards
-        const reversedData = data.reverse();
-        reversedData.forEach((quote, index) => {
+        sortedQuotes.forEach((quote, index) => {
           const card = document.createElement('div');
           card.className = 'quote-card';
+          card.style.animationDelay = `${index * 0.1}s`;
+          
+          // Format date
+          const formattedDate = new Date(quote.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+          
           card.innerHTML = `
             <div class="quote-text">${quote.quote}</div>
             <div class="quote-author">${quote.author}</div>
-            <div class="quote-date">${quote.date}</div>
+            <div class="quote-date">${formattedDate}</div>
           `;
-          container.appendChild(card);
-          animateCards(card, index);
           
-          // 3D effect on mouse move
-          card.addEventListener('mousemove', e => {
+          container.appendChild(card);
+          
+          // Add hover effect
+          card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -515,19 +423,16 @@
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            const rotateY = (x - centerX) / 10;
-            const rotateX = (centerY - y) / 10;
+            const rotateY = (x - centerX) / 15;
+            const rotateX = (centerY - y) / 15;
             
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
           });
           
           card.addEventListener('mouseout', () => {
             card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
           });
         });
-        
-        // Highlight words after display
-        setTimeout(highlightRandomWord, 1000);
         
       } catch (error) {
         console.error('Error:', error);
