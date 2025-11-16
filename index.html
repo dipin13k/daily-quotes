@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ Daily Quotes Collection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Light mode colors */
+      --bg-primary: #f0f4ff;
+      --bg-gradient-1: #667eea;
+      --bg-gradient-2: #764ba2;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --card-border: rgba(255, 255, 255, 0.3);
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a5568;
+      --accent: #667eea;
+      --accent-glow: rgba(102, 126, 234, 0.3);
+      --shadow: rgba(0, 0, 0, 0.1);
+      --particle-color: rgba(255, 255, 255, 0.6);
+    }
+
+    [data-theme="dark"] {
+      /* Dark mode colors */
+      --bg-primary: #0a0e27;
+      --bg-gradient-1: #1a1a2e;
+      --bg-gradient-2: #16213e;
+      --card-bg: rgba(30, 30, 50, 0.6);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #ffffff;
+      --text-secondary: #a0aec0;
+      --accent: #00d4ff;
+      --accent-glow: rgba(0, 212, 255, 0.3);
+      --shadow: rgba(0, 0, 0, 0.3);
+      --particle-color: rgba(0, 212, 255, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
+      transition: all 0.5s ease;
+    }
+
+    /* Animated mesh background */
+    .mesh-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.3;
+      background: 
+        radial-gradient(circle at 20% 50%, var(--accent-glow) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--accent-glow) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, var(--accent-glow) 0%, transparent 50%);
+      animation: meshMove 20s ease-in-out infinite;
+    }
+    @keyframes meshMove {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .particle {
+      position: absolute;
+      background: var(--particle-color);
+      border-radius: 50%;
+      animation: float 15s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-100vh) translateX(100px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Header with glowing effect */
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 2;
+      animation: slideDown 0.8s ease-out;
+    }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--accent), var(--text-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      position: relative;
+      display: inline-block;
+      animation: textGlow 3s ease-in-out infinite;
+    }
+    @keyframes textGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 10px var(--accent-glow));
+      }
+      50% {
+        filter: drop-shadow(0 0 30px var(--accent-glow)) drop-shadow(0 0 40px var(--accent-glow));
+      }
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      animation: fadeIn 1.2s ease-out 0.3s backwards;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--card-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.8rem;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      z-index: 1000;
+      box-shadow: 0 5px 25px var(--shadow);
+    }
+    .theme-toggle:hover {
+      transform: scale(1.2) rotate(180deg);
+      box-shadow: 0 8px 35px var(--accent-glow);
+      border-color: var(--accent);
+    }
+    .theme-toggle:active {
+      transform: scale(0.9) rotate(180deg);
+    }
+
+    /* Stats counter */
+    .stats {
+      text-align: center;
+      margin-bottom: 2rem;
+      z-index: 2;
+      position: relative;
+    }
+    .stat-box {
+      display: inline-block;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 5px 25px var(--shadow);
+      animation: popIn 0.6s ease-out 0.5s backwards;
+    }
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      70% {
+        transform: scale(1.1);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Quotes grid - 3 per row */
+    #quotes-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Quote cards with advanced animations */
+    .quote-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
+      padding: 2rem;
+      border: 2px solid var(--card-border);
+      box-shadow: 0 8px 32px var(--shadow);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      transform: translateY(80px) rotateX(10deg);
+      animation: cardReveal 0.8s forwards;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    @keyframes cardReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+      }
+    }
+
+    /* Stagger animation for each card */
+    .quote-card:nth-child(1) { animation-delay: 0.1s; }
+    .quote-card:nth-child(2) { animation-delay: 0.2s; }
+    .quote-card:nth-child(3) { animation-delay: 0.3s; }
+    .quote-card:nth-child(4) { animation-delay: 0.4s; }
+    .quote-card:nth-child(5) { animation-delay: 0.5s; }
+    .quote-card:nth-child(6) { animation-delay: 0.6s; }
+    .quote-card:nth-child(n+7) { animation-delay: 0.7s; }
+
+    /* Shimmer effect on hover */
+    .quote-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        var(--accent-glow),
+        transparent
+      );
+      transform: rotate(45deg);
+      transition: all 0.6s;
+      opacity: 0;
+    }
+    .quote-card:hover::before {
+      left: 100%;
+      opacity: 1;
+    }
+
+    .quote-card:hover {
+      transform: translateY(-15px) scale(1.03);
+      box-shadow: 0 20px 60px var(--accent-glow);
+      border-color: var(--accent);
+    }
+
+    /* Quote number badge */
+    .quote-number {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 3px 15px var(--accent-glow);
+      animation: rotateBadge 0.6s ease-out;
+    }
+    @keyframes rotateBadge {
+      from {
+        transform: rotate(-180deg) scale(0);
+      }
+      to {
+        transform: rotate(0deg) scale(1);
+      }
+    }
+
+    /* Quote text */
+    .quote-text {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      border-left: 4px solid var(--accent);
+      min-height: 100px;
+      font-weight: 400;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .quote-card:hover .quote-text {
+      padding-left: 2rem;
+      border-left-width: 6px;
+    }
+    .quote-text::before {
+      content: '"';
+      font-size: 4rem;
+      position: absolute;
+      left: -0.5rem;
+      top: -1.5rem;
+      color: var(--accent);
+      opacity: 0.2;
+      font-family: Georgia, serif;
+    }
+
+    /* Author with icon */
+    .quote-author {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .quote-author::before {
+      content: '✍️';
+      font-size: 1.2rem;
+    }
+
+    /* Date badge */
+    .quote-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      background: rgba(0, 0, 0, 0.1);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .quote-date::before {
+      content: '📅';
+    }
+    .quote-card:hover .quote-date {
+      background: var(--accent);
+      color: white;
+      transform: translateX(5px);
+    }
+
+    /* Loading spinner */
+    .loading {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem;
+      font-size: 1.5rem;
+      color: var(--text-primary);
+    }
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--card-border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Error message */
+    .error {
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px solid rgba(255, 100, 100, 0.3);
+      box-shadow: 0 10px 40px rgba(255, 0, 0, 0.2);
+    }
+    .error-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: shake 0.5s ease-in-out;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 5px 25px var(--accent-glow);
+    }
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-top:hover {
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    /* Responsive - 2 columns on tablet */
+    @media (max-width: 1100px) {
+      #quotes-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Responsive - 1 column on mobile */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      #quotes-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .quote-card {
+        padding: 1.5rem;
+      }
+      .theme-toggle {
+        top: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <!-- Animated mesh background -->
+  <div class="mesh-bg"></div>
+
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Header -->
+  <header>
+    <h1>✨ Daily Quotes</h1>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-box">
+      <span class="stat-number" id="quote-count">0</span>
+      <span class="stat-label">Total Quotes</span>
+    </div>
+  </div>
+
+  <!-- Theme toggle -->
+  <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+    <span id="theme-icon">🌙</span>
+  </div>
+
+  <!-- Quotes grid -->
+  <div id="quotes-container">
+    <div class="loading">
+      <div class="spinner"></div>
+      Loading your wisdom...
+    </div>
+  </div>
+
+  <!-- Scroll to top -->
+  <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+    ⬆️
+  </div>
+
+  <script>
+    // Create animated particles
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 25; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const size = Math.random() * 50 + 20;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.bottom = `-${size}px`;
+        particle.style.animationDuration = `${Math.random() * 10 + 15}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(particle);
+      }
+    }
+
+    // Theme toggle with smooth transition
+    function toggleTheme() {
+      const body = document.body;
+      const icon = document.getElementById('theme-icon');
+      const currentTheme = body.getAttribute('data-theme');
+      
+      if (currentTheme === 'dark') {
+        body.setAttribute('data-theme', 'light');
+        icon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        icon.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // Load saved theme
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      const icon = document.getElementById('theme-icon');
+      document.body.setAttribute('data-theme', savedTheme);
+      icon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    // Scroll to top functionality
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.getElementById('scrollTop');
+      if (window.pageYOffset > 300) {
+        scrollTop.classList.add('visible');
+      } else {
+        scrollTop.classList.remove('visible');
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Load quotes (OLDEST TO NEWEST)
+    async function loadQuotes() {
+      const container = document.getElementById('quotes-container');
+      const countElement = document.getElementById('quote-count');
+      
+      try {
+        const response = await fetch('quotes.json');
+        const data = await response.json();
+        
+        if (data.length === 0) {
+          container.innerHTML = `
+            <div class="error">
+              <div class="error-icon">📭</div>
+              <h2>No quotes yet!</h2>
+              <p>Your first quote will appear tomorrow ✨</p>
+            </div>
+          `;
+          return;
+        }
+        
+        // Animate count
+        animateCount(0, data.length, countElement);
+        
+        container.innerHTML = '';
+        
+        // Display oldest to newest
+        data.forEach((quote, index) => {
+          const card = document.createElement('div');
+          card.className = 'quote-card';
+          card.style.animationDelay = `${index * 0.1}s`;
+          card.innerHTML = `
+            <div class="quote-number">${index + 1}</div>
+            <div class="quote-text">${quote.quote}</div>
+            <div class="quote-author">${quote.author}</div>
+            <div class="quote-date">${quote.date}</div>
+          `;
+          container.appendChild(card);
+        });
+        
+      } catch (error) {
+        console.error('Error:', error);
+        container.innerHTML = `
+          <div class="error">
+            <div class="error-icon">⚠️</div>
+            <h2>Failed to load quotes</h2>
+            <p>Please refresh the page to try again</p>
+          </div>
+        `;
+      }
+    }
+
+    // Animate counter
+    function animateCount(start, end, element) {
+      const duration = 1500;
+      const increment = end / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= end) {
+          element.textContent = end;
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }, 16);
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      loadTheme();
+      setTimeout(loadQuotes, 500);
+    });
+  </script>
+</body>
+</html>
