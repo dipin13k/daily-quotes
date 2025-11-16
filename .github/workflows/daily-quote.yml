@@ -1,0 +1,136 @@
+name: Daily Quote
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # 8 AM UTC (adjust as needed)
+  workflow_dispatch:  # Manual trigger
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  quote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+      
+      - name: Fetch and save quote
+        env:
+          TZ: Asia/Kathmandu  # 👈 CHANGE TO YOUR TIMEZONE (e.g., Asia/Kathmandu)
+        run: |
+          python3 << 'EOF'
+          import requests
+          import json
+          from datetime import datetime
+          import sys
+          import time
+
+          def get_quote():
+              # Primary API: ZenQuotes (reliable, no SSL issues)
+              apis = [
+                  {
+                      'url': 'https://zenquotes.io/api/random',
+                      'parse': lambda data: {'quote': data[0]['q'], 'author': data[0]['a']}
+                  },
+                  # Fallback API 1: Type.fit (another reliable option)
+                  {
+                      'url': 'https://type.fit/api/quotes',
+                      'parse': lambda data: {'quote': data[0]['text'], 'author': data[0]['author'] or 'Unknown'}
+                  },
+                  # Fallback API 2: Simple quotes (backup)
+                  {
+                      'url': 'https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json',
+                      'parse': lambda data: {'quote': data['quoteText'], 'author': data['quoteAuthor'] or 'Unknown'}
+                  }
+              ]
+              
+              for i, api in enumerate(apis):
+                  try:
+                      print(f"Trying API {i+1}: {api['url']}")
+                      response = requests.get(api['url'], timeout=10)
+                      response.raise_for_status()
+                      data = response.json()
+                      quote_data = api['parse'](data)
+                      
+                      # Clean up quote (remove citations if present)
+                      quote_data['quote'] = quote_data['quote'].replace('—', '').strip()
+                      
+                      print(f"✅ API {i+1} succeeded!")
+                      return quote_data
+                      
+                  except Exception as e:
+                      print(f"❌ API {i+1} failed: {e}")
+                      if i < len(apis) - 1:
+                          time.sleep(1)  # Wait before retrying next API
+                      continue
+              
+              raise Exception("All APIs failed - check your internet or API status")
+
+          try:
+              # Get quote
+              quote = get_quote()
+              
+              # Create entry
+              entry = {
+                  "date": datetime.now().strftime('%Y-%m-%d'),
+                  "quote": quote['quote'],
+                  "author": quote['author']
+              }
+              
+              # Read existing quotes
+              try:
+                  with open('quotes.json', 'r', encoding='utf-8') as f:
+                      quotes = json.load(f)
+              except FileNotFoundError:
+                  quotes = []
+              except json.JSONDecodeError:
+                  quotes = []  # Start fresh if corrupted
+                  print("⚠️ quotes.json was corrupted, starting fresh")
+              
+              # Add new quote and keep last 30
+              quotes.append(entry)
+              quotes = quotes[-30:]
+              
+              # Write back to file
+              with open('quotes.json', 'w', encoding='utf-8') as f:
+                  json.dump(quotes, f, indent=2, ensure_ascii=False)
+              
+              print(f"✅ Quote saved for {entry['date']}:")
+              print(f"   '{entry['quote'][:60]}...'")
+              print(f"   — {entry['author']}")
+              print(f"📅 Total quotes: {len(quotes)}")
+              
+          except Exception as e:
+              print(f"❌ Critical error: {e}", file=sys.stderr)
+              sys.exit(1)
+          EOF
+      
+      - name: Commit and push
+        run: |
+          git config --global user.name "dipin13k"
+          git config --global user.email "dipinkhadka130@gmail.com"
+          git add quotes.json
+          git status --porcelain
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "📅 Daily quote: $(date -u +'%Y-%m-%d')"
+            git pull --rebase origin main  # Avoid conflicts
+            git push origin main
+            echo "✅ Committed and pushed successfully!"
+          else
+            echo "ℹ️ No changes to commit (quote already exists for today)"
+          fi
