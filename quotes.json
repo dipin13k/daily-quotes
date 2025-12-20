@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-11-20",
-    "quote": "Go confidently in the direction of your dreams! Live the life you've imagined.",
-    "author": "Henry David Thoreau"
-  },
-  {
     "date": "2025-11-21",
     "quote": "I know of only one duty, and that is to love.",
     "author": "George Bernard Shaw"
@@ -148,5 +143,10 @@
     "date": "2025-12-19",
     "quote": "Rest in reason; move in passion.",
     "author": "Kahlil Gibran"
+  },
+  {
+    "date": "2025-12-20",
+    "quote": "You can do two things at once, but you can't focus effectively on two things at once.",
+    "author": "Gary Keller"
   }
 ]
