@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-11-21",
-    "quote": "I know of only one duty, and that is to love.",
-    "author": "George Bernard Shaw"
-  },
-  {
     "date": "2025-11-22",
     "quote": "Death is as sure for that which is born, as birth is for that which is dead. Therefore grieve not for what is inevitable.",
     "author": "Bhagavad Gita"
@@ -148,5 +143,10 @@
     "date": "2025-12-20",
     "quote": "You can do two things at once, but you can't focus effectively on two things at once.",
     "author": "Gary Keller"
+  },
+  {
+    "date": "2025-12-21",
+    "quote": "Adventure is worthwhile in itself.",
+    "author": "Amelia Earhart"
   }
 ]
