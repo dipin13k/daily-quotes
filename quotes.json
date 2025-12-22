@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-11-22",
-    "quote": "Death is as sure for that which is born, as birth is for that which is dead. Therefore grieve not for what is inevitable.",
-    "author": "Bhagavad Gita"
-  },
-  {
     "date": "2025-11-23",
     "quote": "When it is dark enough, you can see the stars.",
     "author": "Ralph Waldo Emerson"
@@ -148,5 +143,10 @@
     "date": "2025-12-21",
     "quote": "Adventure is worthwhile in itself.",
     "author": "Amelia Earhart"
+  },
+  {
+    "date": "2025-12-22",
+    "quote": "Life's too mysterious to take too serious.",
+    "author": "Mary Engelbreit"
   }
 ]
