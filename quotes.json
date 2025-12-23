@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-11-23",
-    "quote": "When it is dark enough, you can see the stars.",
-    "author": "Ralph Waldo Emerson"
-  },
-  {
     "date": "2025-11-24",
     "quote": "Every man gotta right to decide his own destiny.",
     "author": "Bob Marley"
@@ -148,5 +143,10 @@
     "date": "2025-12-22",
     "quote": "Life's too mysterious to take too serious.",
     "author": "Mary Engelbreit"
+  },
+  {
+    "date": "2025-12-23",
+    "quote": "Dreams do come true, if we only wish hard enough, You can have anything in life if you will sacrifice everything else for it.",
+    "author": "James Matthew Barrie"
   }
 ]
