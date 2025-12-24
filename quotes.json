@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-11-24",
-    "quote": "Every man gotta right to decide his own destiny.",
-    "author": "Bob Marley"
-  },
-  {
     "date": "2025-11-25",
     "quote": "If it is not right, do not do it, if it is not true, do not say it.",
     "author": "Marcus Aurelius"
@@ -148,5 +143,10 @@
     "date": "2025-12-23",
     "quote": "Dreams do come true, if we only wish hard enough, You can have anything in life if you will sacrifice everything else for it.",
     "author": "James Matthew Barrie"
+  },
+  {
+    "date": "2025-12-24",
+    "quote": "At every moment where language can't go, that's your mind.",
+    "author": "Bodhidharma"
   }
 ]
