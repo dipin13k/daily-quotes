@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-11-25",
-    "quote": "If it is not right, do not do it, if it is not true, do not say it.",
-    "author": "Marcus Aurelius"
-  },
-  {
     "date": "2025-11-26",
     "quote": "What would you do if you weren't afraid?",
     "author": "Spencer Johnson"
@@ -148,5 +143,10 @@
     "date": "2025-12-24",
     "quote": "At every moment where language can't go, that's your mind.",
     "author": "Bodhidharma"
+  },
+  {
+    "date": "2025-12-25",
+    "quote": "All happiness depends on courage and work.",
+    "author": "Honore de Balzac"
   }
 ]
