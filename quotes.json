@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-11-26",
-    "quote": "What would you do if you weren't afraid?",
-    "author": "Spencer Johnson"
-  },
-  {
     "date": "2025-11-27",
     "quote": "Given the choice between the experience of pain and nothing, I would choose pain.",
     "author": "William Faulkner"
@@ -148,5 +143,10 @@
     "date": "2025-12-25",
     "quote": "All happiness depends on courage and work.",
     "author": "Honore de Balzac"
+  },
+  {
+    "date": "2025-12-26",
+    "quote": "TEAMWORK: the fuel that allows common people attain uncommon results.",
+    "author": "Andrew Carnegie"
   }
 ]
