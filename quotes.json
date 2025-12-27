@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-11-27",
-    "quote": "Given the choice between the experience of pain and nothing, I would choose pain.",
-    "author": "William Faulkner"
-  },
-  {
     "date": "2025-11-28",
     "quote": "Trying to predict the future is like trying to drive down a country road at night with no lights while looking out the back window.",
     "author": "Peter Drucker"
@@ -148,5 +143,10 @@
     "date": "2025-12-26",
     "quote": "TEAMWORK: the fuel that allows common people attain uncommon results.",
     "author": "Andrew Carnegie"
+  },
+  {
+    "date": "2025-12-27",
+    "quote": "Don't try to be young. Just open your mind. Stay interested in stuff.",
+    "author": "Betty White"
   }
 ]
