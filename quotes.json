@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-11-30",
-    "quote": "Do not take life too seriously. You will never get out of it alive.",
-    "author": "Elbert Hubbard"
-  },
-  {
     "date": "2025-12-01",
     "quote": "There are few reasons for telling the truth, but for lying the number is infinite.",
     "author": "Carlos Ruiz Zafon"
@@ -148,5 +143,10 @@
     "date": "2025-12-29",
     "quote": "Talk sense to a fool and he calls you foolish.",
     "author": "Euripides"
+  },
+  {
+    "date": "2025-12-30",
+    "quote": "The present moment dies every moment to become the past , is reborn every moment into the future. All experience is now. Now never ends.",
+    "author": "Deepak Chopra"
   }
 ]
