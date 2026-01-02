@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-03",
-    "quote": "Big people don't make people feel small.",
-    "author": "Robin Sharma"
-  },
-  {
     "date": "2025-12-04",
     "quote": "Opportunities don't often come along. So, when they do, you have to grab them.",
     "author": "Audrey Hepburn"
@@ -148,5 +143,10 @@
     "date": "2026-01-01",
     "quote": "Your life does not get better by chance, it gets better by change.",
     "author": "Jim Rohn"
+  },
+  {
+    "date": "2026-01-02",
+    "quote": "If you don't have time to do it right, when will you have time to do it over?",
+    "author": "John Wooden"
   }
 ]
