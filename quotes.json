@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-04",
-    "quote": "Opportunities don't often come along. So, when they do, you have to grab them.",
-    "author": "Audrey Hepburn"
-  },
-  {
     "date": "2025-12-05",
     "quote": "Only I can change my life. No one can do it for me.",
     "author": "Carol Burnett"
@@ -148,5 +143,10 @@
     "date": "2026-01-02",
     "quote": "If you don't have time to do it right, when will you have time to do it over?",
     "author": "John Wooden"
+  },
+  {
+    "date": "2026-01-03",
+    "quote": "One is never afraid of the unknown; one is afraid of the known coming to an end.",
+    "author": "Jiddu Krishnamurti"
   }
 ]
