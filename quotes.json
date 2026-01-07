@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-08",
-    "quote": "By words the mind is winged.",
-    "author": "Aristophanes"
-  },
-  {
     "date": "2025-12-09",
     "quote": "Gratitude is the fairest blossom which springs from the soul.",
     "author": "Henry Ward Beecher"
@@ -148,5 +143,10 @@
     "date": "2026-01-06",
     "quote": "A pessimist is one who makes difficulties of his opportunities and an optimist is one who makes opportunities of his difficulties.",
     "author": "Harry S. Truman"
+  },
+  {
+    "date": "2026-01-07",
+    "quote": "A clear conscience is the sure sign of a bad memory.",
+    "author": "Mark Twain"
   }
 ]
