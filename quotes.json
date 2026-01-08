@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-09",
-    "quote": "Gratitude is the fairest blossom which springs from the soul.",
-    "author": "Henry Ward Beecher"
-  },
-  {
     "date": "2025-12-10",
     "quote": "If you do not change direction, you may end up where you are heading.",
     "author": "Lao Tzu"
@@ -148,5 +143,10 @@
     "date": "2026-01-07",
     "quote": "A clear conscience is the sure sign of a bad memory.",
     "author": "Mark Twain"
+  },
+  {
+    "date": "2026-01-08",
+    "quote": "Constantly seek criticism. A well thought out critique of whatever you're doing is as valuable as gold.",
+    "author": "Elon Musk"
   }
 ]
