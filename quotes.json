@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-12",
-    "quote": "All religions, arts and sciences are branches of the same tree.",
-    "author": "Albert Einstein"
-  },
-  {
     "date": "2025-12-13",
     "quote": "Nothing good ever comes of violence.",
     "author": "Martin Luther"
@@ -148,5 +143,10 @@
     "date": "2026-01-10",
     "quote": "Nothing is too high for a man to reach, but he must climb with care and confidence",
     "author": "Hans Christian Andersen"
+  },
+  {
+    "date": "2026-01-11",
+    "quote": "Nothing is particularly hard if you divide it into small jobs.",
+    "author": "Henry Ford"
   }
 ]
