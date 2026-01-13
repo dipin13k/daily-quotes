@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-14",
-    "quote": "You're always free to change your mind and choose a different future, or a different past.",
-    "author": "Richard Bach"
-  },
-  {
     "date": "2025-12-15",
     "quote": "No duty is more urgent than that of returning thanks.",
     "author": "James Allen"
@@ -148,5 +143,10 @@
     "date": "2026-01-12",
     "quote": "Sometimes adversity is what you need to face in order to become successful.",
     "author": "Zig Ziglar"
+  },
+  {
+    "date": "2026-01-13",
+    "quote": "What loneliness is more lonely than distrust?",
+    "author": "George Eliot"
   }
 ]
