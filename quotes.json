@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-16",
-    "quote": "A pessimist is one who makes difficulties of his opportunities and an optimist is one who makes opportunities of his difficulties.",
-    "author": "Harry S. Truman"
-  },
-  {
     "date": "2025-12-17",
     "quote": "Do something worth remembering.",
     "author": "Elvis Presley"
@@ -148,5 +143,10 @@
     "date": "2026-01-14",
     "quote": "A simple rule in dealing with those who are hard to get along with is to remember that this person is striving to assert his superiority; and you must deal with him from that point of view.",
     "author": "Alfred Adler"
+  },
+  {
+    "date": "2026-01-15",
+    "quote": "A heart is not judged by how much you love, but by how much you are loved by others.",
+    "author": "Judy Garland"
   }
 ]
