@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-18",
-    "quote": "If you pray for rain, be prepared to deal with some mud.",
-    "author": "Mary Engelbreit"
-  },
-  {
     "date": "2025-12-19",
     "quote": "Rest in reason; move in passion.",
     "author": "Kahlil Gibran"
@@ -148,5 +143,10 @@
     "date": "2026-01-16",
     "quote": "Why fit in when you were born to stand out?",
     "author": "Dr. Seuss"
+  },
+  {
+    "date": "2026-01-17",
+    "quote": "A fool sees himself as another, but a wise man sees others as himself.",
+    "author": "Dogen"
   }
 ]
