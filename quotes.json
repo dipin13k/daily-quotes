@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-19",
-    "quote": "Rest in reason; move in passion.",
-    "author": "Kahlil Gibran"
-  },
-  {
     "date": "2025-12-20",
     "quote": "You can do two things at once, but you can't focus effectively on two things at once.",
     "author": "Gary Keller"
@@ -148,5 +143,10 @@
     "date": "2026-01-17",
     "quote": "A fool sees himself as another, but a wise man sees others as himself.",
     "author": "Dogen"
+  },
+  {
+    "date": "2026-01-18",
+    "quote": "Happiness must be grown in one's own garden.",
+    "author": "Mary Engelbreit"
   }
 ]
