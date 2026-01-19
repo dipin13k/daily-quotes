@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-20",
-    "quote": "You can do two things at once, but you can't focus effectively on two things at once.",
-    "author": "Gary Keller"
-  },
-  {
     "date": "2025-12-21",
     "quote": "Adventure is worthwhile in itself.",
     "author": "Amelia Earhart"
@@ -148,5 +143,10 @@
     "date": "2026-01-18",
     "quote": "Happiness must be grown in one's own garden.",
     "author": "Mary Engelbreit"
+  },
+  {
+    "date": "2026-01-19",
+    "quote": "The smallest of actions is always better than the noblest of intentions.",
+    "author": "Robin Sharma"
   }
 ]
