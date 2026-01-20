@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-21",
-    "quote": "Adventure is worthwhile in itself.",
-    "author": "Amelia Earhart"
-  },
-  {
     "date": "2025-12-22",
     "quote": "Life's too mysterious to take too serious.",
     "author": "Mary Engelbreit"
@@ -148,5 +143,10 @@
     "date": "2026-01-19",
     "quote": "The smallest of actions is always better than the noblest of intentions.",
     "author": "Robin Sharma"
+  },
+  {
+    "date": "2026-01-20",
+    "quote": "Be where your enemy is not.",
+    "author": "Sun Tzu"
   }
 ]
