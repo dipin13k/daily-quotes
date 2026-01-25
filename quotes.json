@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-26",
-    "quote": "TEAMWORK: the fuel that allows common people attain uncommon results.",
-    "author": "Andrew Carnegie"
-  },
-  {
     "date": "2025-12-27",
     "quote": "Don't try to be young. Just open your mind. Stay interested in stuff.",
     "author": "Betty White"
@@ -148,5 +143,10 @@
     "date": "2026-01-24",
     "quote": "Two roads diverged in a wood, and I took the one less traveled by, and that has made all the difference.",
     "author": "Robert Frost"
+  },
+  {
+    "date": "2026-01-25",
+    "quote": "The goal is not to show how great you are to others, but how vulnerable you are to yourself.",
+    "author": "Maxime Lagace"
   }
 ]
