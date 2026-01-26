@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-27",
-    "quote": "Don't try to be young. Just open your mind. Stay interested in stuff.",
-    "author": "Betty White"
-  },
-  {
     "date": "2025-12-28",
     "quote": "Failure is feedback. Learn from it and move on.",
     "author": "Jack Butcher"
@@ -148,5 +143,10 @@
     "date": "2026-01-25",
     "quote": "The goal is not to show how great you are to others, but how vulnerable you are to yourself.",
     "author": "Maxime Lagace"
+  },
+  {
+    "date": "2026-01-26",
+    "quote": "The more reasons you have for achieving your goal, the more determined you will become.",
+    "author": "Brian Tracy"
   }
 ]
