@@ -1,10 +1,5 @@
 [
   {
-    "date": "2025-12-31",
-    "quote": "Wherever you are is the entry point.",
-    "author": "Kabir"
-  },
-  {
     "date": "2026-01-01",
     "quote": "Your life does not get better by chance, it gets better by change.",
     "author": "Jim Rohn"
@@ -148,5 +143,10 @@
     "date": "2026-01-29",
     "quote": "Learn from the rejection and turn it into an opportunity!",
     "author": "Mary Engelbreit"
+  },
+  {
+    "date": "2026-01-30",
+    "quote": "The only reason to be alive is to enjoy it.",
+    "author": "Rita Mae Brown"
   }
 ]
