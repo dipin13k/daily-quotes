@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-01",
-    "quote": "Your life does not get better by chance, it gets better by change.",
-    "author": "Jim Rohn"
-  },
-  {
     "date": "2026-01-02",
     "quote": "If you don't have time to do it right, when will you have time to do it over?",
     "author": "John Wooden"
@@ -148,5 +143,10 @@
     "date": "2026-01-30",
     "quote": "The only reason to be alive is to enjoy it.",
     "author": "Rita Mae Brown"
+  },
+  {
+    "date": "2026-01-31",
+    "quote": "You find peace not by rearranging the circumstances of your life, but by realizing who you are at the deepest level.",
+    "author": "Eckhart Tolle"
   }
 ]
