@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-03",
-    "quote": "One is never afraid of the unknown; one is afraid of the known coming to an end.",
-    "author": "Jiddu Krishnamurti"
-  },
-  {
     "date": "2026-01-04",
     "quote": "The source of a true smile is an awakened mind.",
     "author": "Thich Nhat Hanh"
@@ -148,5 +143,10 @@
     "date": "2026-02-01",
     "quote": "Constantly think about how you could be doing things better.",
     "author": "Elon Musk"
+  },
+  {
+    "date": "2026-02-02",
+    "quote": "Hope is a waking dream.",
+    "author": "Aristotle"
   }
 ]
