@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-04",
-    "quote": "The source of a true smile is an awakened mind.",
-    "author": "Thich Nhat Hanh"
-  },
-  {
     "date": "2026-01-05",
     "quote": "Our greatest glory is not in never falling, but in rising every time we fall.",
     "author": "Confucius"
@@ -148,5 +143,10 @@
     "date": "2026-02-02",
     "quote": "Hope is a waking dream.",
     "author": "Aristotle"
+  },
+  {
+    "date": "2026-02-03",
+    "quote": "Life can be wonderful if you're not afraid of it.",
+    "author": "Charlie Chaplin"
   }
 ]
