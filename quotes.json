@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-06",
-    "quote": "A pessimist is one who makes difficulties of his opportunities and an optimist is one who makes opportunities of his difficulties.",
-    "author": "Harry S. Truman"
-  },
-  {
     "date": "2026-01-07",
     "quote": "A clear conscience is the sure sign of a bad memory.",
     "author": "Mark Twain"
@@ -148,5 +143,10 @@
     "date": "2026-02-04",
     "quote": "Success is the progressive realization of a worthy goal or ideal.",
     "author": "Earl Nightingale"
+  },
+  {
+    "date": "2026-02-05",
+    "quote": "It's possible in ways both large or small to make a difference in someone's life.",
+    "author": "Yanni"
   }
 ]
