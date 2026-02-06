@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-07",
-    "quote": "A clear conscience is the sure sign of a bad memory.",
-    "author": "Mark Twain"
-  },
-  {
     "date": "2026-01-08",
     "quote": "Constantly seek criticism. A well thought out critique of whatever you're doing is as valuable as gold.",
     "author": "Elon Musk"
@@ -148,5 +143,10 @@
     "date": "2026-02-05",
     "quote": "It's possible in ways both large or small to make a difference in someone's life.",
     "author": "Yanni"
+  },
+  {
+    "date": "2026-02-06",
+    "quote": "If light is in your heart, you will find your way home.",
+    "author": "Rumi"
   }
 ]
