@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-09",
-    "quote": "Repetition does not transform a lie into a truth.",
-    "author": "Franklin D. Roosevelt"
-  },
-  {
     "date": "2026-01-10",
     "quote": "Nothing is too high for a man to reach, but he must climb with care and confidence",
     "author": "Hans Christian Andersen"
@@ -148,5 +143,10 @@
     "date": "2026-02-07",
     "quote": "Forget mistakes. Forget failure. Forget everything except what you are going to do now and do it. Today is your lucky day!",
     "author": "Og Mandino"
+  },
+  {
+    "date": "2026-02-08",
+    "quote": "Beware of false knowledge, it is more dangerous than ignorance.",
+    "author": "George Bernard Shaw"
   }
 ]
