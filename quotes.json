@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-10",
-    "quote": "Nothing is too high for a man to reach, but he must climb with care and confidence",
-    "author": "Hans Christian Andersen"
-  },
-  {
     "date": "2026-01-11",
     "quote": "Nothing is particularly hard if you divide it into small jobs.",
     "author": "Henry Ford"
@@ -148,5 +143,10 @@
     "date": "2026-02-08",
     "quote": "Beware of false knowledge, it is more dangerous than ignorance.",
     "author": "George Bernard Shaw"
+  },
+  {
+    "date": "2026-02-09",
+    "quote": "Given the choice between the experience of pain and nothing, I would choose pain.",
+    "author": "William Faulkner"
   }
 ]
