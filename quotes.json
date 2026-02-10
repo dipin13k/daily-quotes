@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-11",
-    "quote": "Nothing is particularly hard if you divide it into small jobs.",
-    "author": "Henry Ford"
-  },
-  {
     "date": "2026-01-12",
     "quote": "Sometimes adversity is what you need to face in order to become successful.",
     "author": "Zig Ziglar"
@@ -148,5 +143,10 @@
     "date": "2026-02-09",
     "quote": "Given the choice between the experience of pain and nothing, I would choose pain.",
     "author": "William Faulkner"
+  },
+  {
+    "date": "2026-02-10",
+    "quote": "No one returns from a long journey the same person they were before.",
+    "author": "Zen Proverb"
   }
 ]
