@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-12",
-    "quote": "Sometimes adversity is what you need to face in order to become successful.",
-    "author": "Zig Ziglar"
-  },
-  {
     "date": "2026-01-13",
     "quote": "What loneliness is more lonely than distrust?",
     "author": "George Eliot"
@@ -148,5 +143,10 @@
     "date": "2026-02-10",
     "quote": "No one returns from a long journey the same person they were before.",
     "author": "Zen Proverb"
+  },
+  {
+    "date": "2026-02-11",
+    "quote": "We know nothing of tomorrow, our business is to be good and happy today.",
+    "author": "Sydney Smith"
   }
 ]
