@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-13",
-    "quote": "What loneliness is more lonely than distrust?",
-    "author": "George Eliot"
-  },
-  {
     "date": "2026-01-14",
     "quote": "A simple rule in dealing with those who are hard to get along with is to remember that this person is striving to assert his superiority; and you must deal with him from that point of view.",
     "author": "Alfred Adler"
@@ -148,5 +143,10 @@
     "date": "2026-02-11",
     "quote": "We know nothing of tomorrow, our business is to be good and happy today.",
     "author": "Sydney Smith"
+  },
+  {
+    "date": "2026-02-12",
+    "quote": "Courage is almost a contradiction in terms. It means a strong desire to live taking the form of a readiness to die.",
+    "author": "Gilbert Chesterton"
   }
 ]
