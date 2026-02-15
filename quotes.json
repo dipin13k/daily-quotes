@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-16",
-    "quote": "Why fit in when you were born to stand out?",
-    "author": "Dr. Seuss"
-  },
-  {
     "date": "2026-01-17",
     "quote": "A fool sees himself as another, but a wise man sees others as himself.",
     "author": "Dogen"
@@ -148,5 +143,10 @@
     "date": "2026-02-14",
     "quote": "There is no path to Peace. Peace is the path.",
     "author": "Dan Millman"
+  },
+  {
+    "date": "2026-02-15",
+    "quote": "In order to control myself I must first accept myself by going with and not against my nature.",
+    "author": "Bruce Lee"
   }
 ]
