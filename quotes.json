@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-18",
-    "quote": "Happiness must be grown in one's own garden.",
-    "author": "Mary Engelbreit"
-  },
-  {
     "date": "2026-01-19",
     "quote": "The smallest of actions is always better than the noblest of intentions.",
     "author": "Robin Sharma"
@@ -148,5 +143,10 @@
     "date": "2026-02-16",
     "quote": "Much learning does not teach understanding.",
     "author": "Heraclitus"
+  },
+  {
+    "date": "2026-02-17",
+    "quote": "You must find the place inside yourself where nothing is impossible.",
+    "author": "Deepak Chopra"
   }
 ]
