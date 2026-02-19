@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-20",
-    "quote": "Be where your enemy is not.",
-    "author": "Sun Tzu"
-  },
-  {
     "date": "2026-01-21",
     "quote": "Any thought that is passed on to the subconscious often enough and convincingly enough is finally accepted.",
     "author": "Robert Collier"
@@ -148,5 +143,10 @@
     "date": "2026-02-18",
     "quote": "Stand up to your obstacles and do something about them. You'll find they haven't half the strength you think they have.",
     "author": "Norman Vincent Peale"
+  },
+  {
+    "date": "2026-02-19",
+    "quote": "Winners don't Quit. That's why they Win.",
+    "author": "Unknown"
   }
 ]
