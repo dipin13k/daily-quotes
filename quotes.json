@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-22",
-    "quote": "When asked, how do you write? I invariably answer, one word at a time.",
-    "author": "Stephen King"
-  },
-  {
     "date": "2026-01-23",
     "quote": "A hero is an ordinary person doing things in an extra ordinary way.",
     "author": "Christopher Reeve"
@@ -148,5 +143,10 @@
     "date": "2026-02-20",
     "quote": "Heaven is right where you are standing.",
     "author": "Morihei Ueshiba"
+  },
+  {
+    "date": "2026-02-21",
+    "quote": "Whoever is happy will make others happy too.",
+    "author": "Anne Frank"
   }
 ]
