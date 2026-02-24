@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-25",
-    "quote": "The goal is not to show how great you are to others, but how vulnerable you are to yourself.",
-    "author": "Maxime Lagace"
-  },
-  {
     "date": "2026-01-26",
     "quote": "The more reasons you have for achieving your goal, the more determined you will become.",
     "author": "Brian Tracy"
@@ -148,5 +143,10 @@
     "date": "2026-02-23",
     "quote": "To be angry is to revenge the faults of others on ourselves.",
     "author": "Alexander Pope"
+  },
+  {
+    "date": "2026-02-24",
+    "quote": "Absorb what is useful, discard what is not, add what is uniquely your own.",
+    "author": "Bruce Lee"
   }
 ]
