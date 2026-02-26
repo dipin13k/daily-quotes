@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-27",
-    "quote": "All we have to decide is what to do with the time that is given to us.",
-    "author": "J.R.R. Tolkien"
-  },
-  {
     "date": "2026-01-28",
     "quote": "Nothing is easier than fault finding.",
     "author": "Og Mandino"
@@ -148,5 +143,10 @@
     "date": "2026-02-25",
     "quote": "If you can't, you must. If you must, you can.",
     "author": "Tony Robbins"
+  },
+  {
+    "date": "2026-02-26",
+    "quote": "Change is never easy, but always possible.",
+    "author": "Barack Obama"
   }
 ]
