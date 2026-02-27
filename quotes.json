@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-28",
-    "quote": "Nothing is easier than fault finding.",
-    "author": "Og Mandino"
-  },
-  {
     "date": "2026-01-29",
     "quote": "Learn from the rejection and turn it into an opportunity!",
     "author": "Mary Engelbreit"
@@ -148,5 +143,10 @@
     "date": "2026-02-26",
     "quote": "Change is never easy, but always possible.",
     "author": "Barack Obama"
+  },
+  {
+    "date": "2026-02-27",
+    "quote": "It is children only who enjoy the present; their elders either live on the memory of the past or the hope of the future.",
+    "author": "Nicolas Chamfort"
   }
 ]
