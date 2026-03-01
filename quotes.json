@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-01-30",
-    "quote": "The only reason to be alive is to enjoy it.",
-    "author": "Rita Mae Brown"
-  },
-  {
     "date": "2026-01-31",
     "quote": "You find peace not by rearranging the circumstances of your life, but by realizing who you are at the deepest level.",
     "author": "Eckhart Tolle"
@@ -148,5 +143,10 @@
     "date": "2026-02-28",
     "quote": "The secret of success lies not in doing your own work, but in recognizing the right man to do it.",
     "author": "Andrew Carnegie"
+  },
+  {
+    "date": "2026-03-01",
+    "quote": "Everyone thinks of changing the world, but no one thinks of changing himself.",
+    "author": "Leo Tolstoy"
   }
 ]
