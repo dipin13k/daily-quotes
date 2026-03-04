@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-02-02",
-    "quote": "Hope is a waking dream.",
-    "author": "Aristotle"
-  },
-  {
     "date": "2026-02-03",
     "quote": "Life can be wonderful if you're not afraid of it.",
     "author": "Charlie Chaplin"
@@ -148,5 +143,10 @@
     "date": "2026-03-03",
     "quote": "A good character is the best tombstone. Carve your name on hearts, not on marble.",
     "author": "Charles Spurgeon"
+  },
+  {
+    "date": "2026-03-04",
+    "quote": "Don't let anyone define you. You define yourself.",
+    "author": "Billie Jean King"
   }
 ]
