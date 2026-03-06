@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-02-04",
-    "quote": "Success is the progressive realization of a worthy goal or ideal.",
-    "author": "Earl Nightingale"
-  },
-  {
     "date": "2026-02-05",
     "quote": "It's possible in ways both large or small to make a difference in someone's life.",
     "author": "Yanni"
@@ -148,5 +143,10 @@
     "date": "2026-03-05",
     "quote": "Generosity is giving more than you can, and pride is taking less than you need.",
     "author": "Kahlil Gibran"
+  },
+  {
+    "date": "2026-03-06",
+    "quote": "Motivation gets you going and habit gets you there.",
+    "author": "Zig Ziglar"
   }
 ]
