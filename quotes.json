@@ -1,10 +1,5 @@
 [
   {
-    "date": "2026-02-05",
-    "quote": "It's possible in ways both large or small to make a difference in someone's life.",
-    "author": "Yanni"
-  },
-  {
     "date": "2026-02-06",
     "quote": "If light is in your heart, you will find your way home.",
     "author": "Rumi"
@@ -148,5 +143,10 @@
     "date": "2026-03-06",
     "quote": "Motivation gets you going and habit gets you there.",
     "author": "Zig Ziglar"
+  },
+  {
+    "date": "2026-03-07",
+    "quote": "We suffer more often in imagination than in reality.",
+    "author": "Seneca"
   }
 ]
